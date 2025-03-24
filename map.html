@@ -3,17 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nowy Ekran</title>
+  <title>Nowy Ekran z Mapą</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <!-- Dodajemy styl dla mapy -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
 
   <div class="container mt-5">
-    <h1>Nowy Ekran</h1>
-    <p>To jest zawartość nowego ekranu.</p>
+    <h1>Mapa OpenStreetMap</h1>
+    <p>Twoja lokalizacja:</p>
+    <div id="map"></div>
+    <p id="location">Ładowanie lokalizacji...</p>
     <a href="index.html" class="btn btn-secondary">Powrót do strony głównej</a>
   </div>
 
-  <script src="app.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+  <script>
+    // Funkcja do inicjalizacji mapy
+    function initMap(latitude, longitude) {
+      // Tworzymy mapę i ustawiamy współrzędne
+      var map = L.map('map').setView([latitude, longitude], 17);
+
+      // Ładujemy mapę OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+
+      // Dodajemy marker na mapie w miejscu użytkownika
+      L.marker([latitude, longitude]).addTo(map)
+        .bindPopup('Twoja lokalizacja!')
+        .openPopup();
+    }
+
+    // Funkcja do pobierania lokalizacji GPS
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+
+          // Wyświetlamy lokalizację
+          document.getElementById('location').textContent = 'Twoja lokalizacja: ' + latitude.toFixed(5) + ', ' + longitude.toFixed(5);
+
+          // Inicjalizujemy mapę z lokalizacją użytkownika
+          initMap(latitude, longitude);
+        }, function(error) {
+          document.getElementById('location').textContent = 'Błąd odczytu lokalizacji: ' + error.message;
+        });
+      } else {
+        document.getElementById('location').textContent = 'Geolokalizacja nie jest wspierana przez tę przeglądarkę.';
+      }
+    }
+
+    // Wywołanie funkcji geolokalizacji
+    getLocation();
+  </script>
 </body>
 </html>
