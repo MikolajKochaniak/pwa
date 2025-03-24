@@ -2,6 +2,7 @@ var cacheName = 'hello-pwa';
 var filesToCache = [
   '/',
   '/index.html',
+  '/map.html',
   '/css/style.css',
   '/js/main.js'
 ];
