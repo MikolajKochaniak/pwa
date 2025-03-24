@@ -3,6 +3,7 @@ var filesToCache = [
   '/',
   '/index.html',
   '/map.html',
+  '/sos-screen.html',
   '/css/style.css',
   '/js/main.js'
 ];

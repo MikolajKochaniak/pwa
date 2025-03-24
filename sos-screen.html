@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ekran SOS</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    .container {
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Sygnal SOS</h1>
+    <p>Wciśnij przycisk, aby wysłać sygnał SOS</p>
+
+    <!-- Przycisk SOS -->
+    <button id="sosButton" class="btn btn-danger">Wyslij SOS</button>
+    <br><br>
+
+    <!-- Powrót na stronę główną -->
+    <a href="index.html" class="btn btn-secondary">Powrót na stronę główną</a>
+  </div>
+
+  <script>
+    // Funkcja do wibrowania telefonu
+    function vibrateSOS() {
+      // Sprawdzenie, czy urządzenie obsługuje wibrację
+      if ("vibrate" in navigator) {
+        // Wzór wibracji: 3 krótkie, 3 długie, 3 krótkie
+        navigator.vibrate([200, 100, 200, 1000, 200, 100, 200]);
+      } else {
+        alert("Twoje urządzenie nie obsługuje wibracji.");
+      }
+    }
+
+    // Dodanie nasłuchu na kliknięcie przycisku
+    document.getElementById('sosButton').addEventListener('click', vibrateSOS);
+  </script>
+
+</body>
+</html>
