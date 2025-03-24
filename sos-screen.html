@@ -18,27 +18,21 @@
     <h1>Sygnal SOS</h1>
     <p>Wciśnij przycisk, aby wysłać sygnał SOS</p>
 
-    <!-- Przycisk SOS -->
     <button id="sosButton" class="btn btn-danger">Wyslij SOS</button>
     <br><br>
 
-    <!-- Powrót na stronę główną -->
     <a href="index.html" class="btn btn-secondary">Powrót na stronę główną</a>
   </div>
 
   <script>
-    // Funkcja do wibrowania telefonu
     function vibrateSOS() {
-      // Sprawdzenie, czy urządzenie obsługuje wibrację
       if ("vibrate" in navigator) {
-        // Wzór wibracji: 3 krótkie, 3 długie, 3 krótkie
-        navigator.vibrate([200, 100, 200, 1000, 200, 100, 200]);
+        navigator.vibrate([100, 30, 100, 30, 100, 30, 200, 30, 200, 30, 200, 30, 100, 30, 100, 30, 100]);
       } else {
         alert("Twoje urządzenie nie obsługuje wibracji.");
       }
     }
 
-    // Dodanie nasłuchu na kliknięcie przycisku
     document.getElementById('sosButton').addEventListener('click', vibrateSOS);
   </script>
 
